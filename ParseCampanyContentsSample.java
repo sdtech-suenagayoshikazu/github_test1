@@ -68,8 +68,9 @@ public class ParseCampanyContentsSample {
      * 会社四季報の企業概要ページの内容から企業データを取得する
      * 
      * @throws SBI_Exception
+     * @throws NoCampanyException
      */
-    public void perseCampanyContents() {
+    public void perseCampanyContents() throws SBI_Exception, NoCampanyException {
 
         Pattern pattern;
         Matcher matcher;
@@ -108,14 +109,12 @@ public class ParseCampanyContentsSample {
                         .compile("作成日：([0-9]{4})年([0-9]{1,2})月([0-9]{1,2})日");
                 matcher = pattern.matcher(line);
                 if (matcher.matches() == true) {
-                    this.memoDay = matcher.group(1) + "/" + matcher.group(2)
-                            + "/" + matcher.group(3);
+                    this.memoDay = matcher.group(1) + "/" + matcher.group(2) + "/" + matcher.group(3);
                     continue;
                 }
 
                 // 企業コードから対象行を取得
-                // なぜか次のif文だとうまくいかない
-　　　　　　　　// →　原因が分かり次第，修正します
+                // なぜか次のif文だとうまくいかない　→　原因が分かり次第，修正します
                 // if(line == this.campanyCd) {
 
                 // 不本意ながら，無駄に正規表現を使う
@@ -178,7 +177,7 @@ public class ParseCampanyContentsSample {
 
                 // メモ
                 // なぜか次の正規表現では引っかからなかった
-                // →　原因が分かり次第，修正します
+                //　→　原因が分かり次第，修正します
                 // pattern = Pattern.compile("^【");
 
                 // 不本意ながら次の正規表現で
@@ -201,11 +200,75 @@ public class ParseCampanyContentsSample {
                     gotMemo2 = true;
                     break;
                 }
+
+                // 以下，例外
+                // 別メソッドにしようと考えていたが，
+                // campanyContents を readline で読み取るため，
+                // 続けて記述する
+
+                String errorMessage;
+                errorMessage = ".*お客様のご選択されたサービスは受付出来ませんでした。.*";
+                if (Pattern.matches(errorMessage, line) == true) {
+                    throw new SBI_Exception(errorMessage);
+                }
+
+                // ログインされていないとき
+                errorMessage = ".*こちらの情報およびサービスをご利用いただくためには、顧客サイトへのログインが必要です。.*";
+                if (Pattern.matches(errorMessage, line) == true) {
+                    throw new SBI_Exception(errorMessage);
+                }
+
+                // 対象銘柄がないときというのは通常起こり得るケースなので，スキップするだけ
+                errorMessage = ".*対象銘柄はありません。.*";
+                // errorMessage = ".*";
+                if (Pattern.matches(errorMessage, line) == true) {
+                    throw new NoCampanyException(errorMessage);
+                }
+
+                // 投資信託などのときは，会社四季報の情報が提供されていない
+                // これも通常起こり得るケースなので，スキップするだけ
+                errorMessage = ".*お客様が選択された銘柄の投資情報は、現在提供しておりません。.*";
+                if (Pattern.matches(errorMessage, line) == true) {
+                    throw new NoCampanyException(errorMessage);
+                }
             }
 
         } catch (IOException e) {
             e.printStackTrace();
 
         }
+    }
+}
+
+なお，独自の例外クラスをつくる際には，Exception クラスを継承してあげなければいけませんが，それは別のところに書きました（下記）。
+
+/**
+ * SBI証券のサイトの操作時に発生する例外
+ * 例えば，サイト内容をうまく取得できなかった場合など
+ */
+public class SBI_Exception extends Exception {
+
+    /**
+     * コンストラクタ
+     * 
+     * @param message
+     */
+    public SBI_Exception(String message) {
+        super(message);
+    }
+}
+
+/**
+ * SBI証券のサイトの操作時，対象銘柄がなかったときに発生する例外
+ */
+public class NoCampanyException extends Exception {
+
+    /**
+     * コンストラクタ
+     * 
+     * @param message
+     */
+    public NoCampanyException(String message) {
+        super(message);
     }
 }
