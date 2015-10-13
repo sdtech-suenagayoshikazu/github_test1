@@ -38,7 +38,13 @@ public class LoginSample {
         } catch (HttpException e) {
             e.printStackTrace();
 
-        } catch (IOException e) {
+         } catch (IOException e) {
+            e.printStackTrace();
+
+         } catch (IOException e) {
+            e.printStackTrace();
+
+         } catch (IOException e) {
             e.printStackTrace();
 
         } finally {
