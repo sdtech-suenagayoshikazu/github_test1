@@ -111,6 +111,10 @@ public class Log {
         return this.diffTime;
     }
 
+    public String getDiffTime2() {
+        return this.diffTime;
+    }
+
     /**
      * ƒƒO‚ğ‘‚«‚Ş
      */
