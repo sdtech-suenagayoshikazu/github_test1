@@ -4,68 +4,68 @@ import java.util.regex.*;
 public class ParseCampanyContentsSample {
 
     /**
-     * Šé‹ÆƒR[ƒh
+     * ä¼æ¥­ã‚³ãƒ¼ãƒ‰
      */
     private String campanyCd;
 
     /**
-     * Šé‹ÆŠT—vƒy[ƒW‚Ì“à—e
+     * ä¼æ¥­æ¦‚è¦ãƒšãƒ¼ã‚¸ã®å†…å®¹
      */
     private BufferedReader campanyContents;
 
     /**
-     * Šé‹Æ–¼
+     * ä¼æ¥­å
      */
     private String campany;
 
     /**
-     * —Dæsê
+     * å„ªå…ˆå¸‚å ´
      */
     private String market;
 
     /**
-     * ‰ïĞl‹G•ñ‚Ì‹L–ì¬“ú
+     * ä¼šç¤¾å››å­£å ±ã®è¨˜äº‹ä½œæˆæ—¥
      */
     private String memoDay;
 
     /**
-     * Šé‹ÆƒTƒCƒg‚ÌURL
+     * ä¼æ¥­ã‚µã‚¤ãƒˆã®URL
      */
     private String campanyUrl;
 
     /**
-     * ‰ïĞl‹G•ñ‚ÉŒfÚ‚³‚ê‚Ä‚¢‚é‹Æí
+     * ä¼šç¤¾å››å­£å ±ã«æ²è¼‰ã•ã‚Œã¦ã„ã‚‹æ¥­ç¨®
      */
     private String gyosyu;
 
     /**
-     * ŒˆZŒ ”š‚Ì‚İ
+     * æ±ºç®—æœˆ æ•°å­—ã®ã¿
      */
     private int kessanMonth;
 
     /**
-     * “ÁF y“ÁFz‚Íœ‚­
+     * ç‰¹è‰² ã€ç‰¹è‰²ã€‘ã¯é™¤ã
      */
     private String tokusyoku;
 
     /**
-     * ˜AŒ‹–‹Æ‚Ü‚½‚Í’P“Æ–‹Æ‚Ì”„ã\¬
-     * y˜AŒ‹–‹Æz‚Ü‚½‚Íy’P“Æ–‹Æz‚Æ‚¢‚¤•¶Œ¾‚Íœ‚­
+     * é€£çµäº‹æ¥­ã¾ãŸã¯å˜ç‹¬äº‹æ¥­ã®å£²ä¸Šæ§‹æˆ
+     * ã€é€£çµäº‹æ¥­ã€‘ã¾ãŸã¯ã€å˜ç‹¬äº‹æ¥­ã€‘ã¨ã„ã†æ–‡è¨€ã¯é™¤ã
      */
     private String jigyo;
 
     /**
-     * ‰ïĞl‹G•ñ‚ÌƒRƒƒ“ƒg
+     * ä¼šç¤¾å››å­£å ±ã®ã‚³ãƒ¡ãƒ³ãƒˆ
      */
     private String memo;
 
     /**
-     * ‰ïĞl‹G•ñ‚ÌƒRƒƒ“ƒg2
+     * ä¼šç¤¾å››å­£å ±ã®ã‚³ãƒ¡ãƒ³ãƒˆ2
      */
     private String memo2;
 
     /**
-     * ‰ïĞl‹G•ñ‚ÌŠé‹ÆŠT—vƒy[ƒW‚Ì“à—e‚©‚çŠé‹Æƒf[ƒ^‚ğæ“¾‚·‚é
+     * ä¼šç¤¾å››å­£å ±ã®ä¼æ¥­æ¦‚è¦ãƒšãƒ¼ã‚¸ã®å†…å®¹ã‹ã‚‰ä¼æ¥­ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
      * 
      * @throws SBI_Exception
      * @throws NoCampanyException
@@ -91,33 +91,34 @@ public class ParseCampanyContentsSample {
             while ((line = this.campanyContents.readLine()) != null) {
                 i++;
 
-                // “–Ğ—Dæsê
-                // ‚È‚º‚©Ÿ‚Ì³‹K•\Œ»‚Å‚Íˆø‚Á‚©‚©‚ç‚È‚©‚Á‚½
+                // å½“ç¤¾å„ªå…ˆå¸‚å ´
+                // ãªãœã‹æ¬¡ã®æ­£è¦è¡¨ç¾ã§ã¯å¼•ã£ã‹ã‹ã‚‰ãªã‹ã£ãŸ
                 // pattern =
-                // Pattern.compile("<div class=\"margin-1\" style=\"margin-top:2px\">&nbsp;(.+)&nbsp;<font class=\"stext-gray\">i“–Ğ—Dæsêj</font>");
+                // Pattern.compile("<div class=\"margin-1\" style=\"margin-top:2px\">&nbsp;(.+)&nbsp;<font class=\"stext-gray\">ï¼ˆå½“ç¤¾å„ªå…ˆå¸‚å ´ï¼‰</font>");
 
-                // •s–{ˆÓ‚È‚ª‚çCŸ‚Ì³‹K•\Œ»‚ÅE‚¤
+                // ä¸æœ¬æ„ãªãŒã‚‰ï¼Œæ¬¡ã®æ­£è¦è¡¨ç¾ã§æ‹¾ã†
                 pattern = Pattern
-                        .compile(".*<div class=\"margin-1\" style=\"margin-top:2px\">&nbsp;(.+)&nbsp;<font class=\"stext-gray\">i“–Ğ—Dæsêj</font>.*");
+                        .compile(".*<div class=\"margin-1\" style=\"margin-top:2px\">&nbsp;(.+)&nbsp;<font class=\"stext-gray\">ï¼ˆå½“ç¤¾å„ªå…ˆå¸‚å ´ï¼‰</font>.*");
                 matcher = pattern.matcher(line);
                 if (matcher.matches() == true) {
                     this.market = matcher.group(1);
+                    continue;
                 }
 
-                // ì¬“ú
+                // ä½œæˆæ—¥
                 pattern = Pattern
-                        .compile("ì¬“úF([0-9]{4})”N([0-9]{1,2})Œ([0-9]{1,2})“ú");
+                        .compile("ä½œæˆæ—¥ï¼š([0-9]{4})å¹´([0-9]{1,2})æœˆ([0-9]{1,2})æ—¥");
                 matcher = pattern.matcher(line);
                 if (matcher.matches() == true) {
                     this.memoDay = matcher.group(1) + "/" + matcher.group(2) + "/" + matcher.group(3);
                     continue;
                 }
 
-                // Šé‹ÆƒR[ƒh‚©‚ç‘ÎÛs‚ğæ“¾
-                // ‚È‚º‚©Ÿ‚Ìif•¶‚¾‚Æ‚¤‚Ü‚­‚¢‚©‚È‚¢@¨@Œ´ˆö‚ª•ª‚©‚èŸ‘æCC³‚µ‚Ü‚·
+                // ä¼æ¥­ã‚³ãƒ¼ãƒ‰ã‹ã‚‰å¯¾è±¡è¡Œã‚’å–å¾—
+                // ãªãœã‹æ¬¡ã®ifæ–‡ã ã¨ã†ã¾ãã„ã‹ãªã„ã€€â†’ã€€åŸå› ãŒåˆ†ã‹ã‚Šæ¬¡ç¬¬ï¼Œä¿®æ­£ã—ã¾ã™
                 // if(line == this.campanyCd) {
 
-                // •s–{ˆÓ‚È‚ª‚çC–³‘Ê‚É³‹K•\Œ»‚ğg‚¤
+                // ä¸æœ¬æ„ãªãŒã‚‰ï¼Œç„¡é§„ã«æ­£è¦è¡¨ç¾ã‚’ä½¿ã†
                 pattern = Pattern.compile("^" + this.campanyCd);
                 matcher = pattern.matcher(line);
                 if (matcher.matches() == true) {
@@ -127,45 +128,45 @@ public class ParseCampanyContentsSample {
                     continue;
                 }
 
-                // Šé‹Æ–¼
+                // ä¼æ¥­å
                 if (i == campanyRow) {
-                    this.campany = line.replace("(Š”)", "");
+                    this.campany = line.replace("(æ ª)", "");
                     continue;
                 }
 
-                // ‹Æí
+                // æ¥­ç¨®
                 if (i == gyosyuRow) {
                     this.gyosyu = line;
                     continue;
                 }
 
                 // URL
-                pattern = Pattern.compile("y‚t‚q‚kz<a href=\"(.+)");
+                pattern = Pattern.compile("ã€ï¼µï¼²ï¼¬ã€‘<a href=\"(.+)");
                 matcher = pattern.matcher(line);
                 if (matcher.matches() == true) {
                     this.campanyUrl = matcher.group(1);
                     continue;
                 }
 
-                // ŒˆZŒ
-                // 3Œ ‚Ìƒpƒ^[ƒ“‚ÆC3.14 ‚Ìƒpƒ^[ƒ“‚ª‚ ‚é
-                pattern = Pattern.compile("yŒˆZz([0-9]{1,2})[Œ.][0-9]{0,2}");
+                // æ±ºç®—æœˆ
+                // 3æœˆ ã®ãƒ‘ã‚¿ãƒ¼ãƒ³ã¨ï¼Œ3.14 ã®ãƒ‘ã‚¿ãƒ¼ãƒ³ãŒã‚ã‚‹
+                pattern = Pattern.compile("ã€æ±ºç®—ã€‘([0-9]{1,2})[æœˆ.][0-9]{0,2}");
                 matcher = pattern.matcher(line);
                 if (matcher.matches() == true) {
                     this.kessanMonth = Integer.parseInt(matcher.group(1));
                     continue;
                 }
 
-                // “ÁF
-                pattern = Pattern.compile("y“ÁFz(.+)");
+                // ç‰¹è‰²
+                pattern = Pattern.compile("ã€ç‰¹è‰²ã€‘(.+)");
                 matcher = pattern.matcher(line);
                 if (matcher.matches() == true) {
                     this.tokusyoku = matcher.group(1);
                     continue;
                 }
 
-                // –‹Æ
-                pattern = Pattern.compile("(?:y˜AŒ‹–‹Æz|y’P“Æ–‹Æz)(.+)");
+                // äº‹æ¥­
+                pattern = Pattern.compile("(?:ã€é€£çµäº‹æ¥­ã€‘|ã€å˜ç‹¬äº‹æ¥­ã€‘)(.+)");
                 matcher = pattern.matcher(line);
                 if (matcher.matches() == true) {
                     this.jigyo = matcher.group(1);
@@ -175,13 +176,13 @@ public class ParseCampanyContentsSample {
                     continue;
                 }
 
-                // ƒƒ‚
-                // ‚È‚º‚©Ÿ‚Ì³‹K•\Œ»‚Å‚Íˆø‚Á‚©‚©‚ç‚È‚©‚Á‚½
-                //@¨@Œ´ˆö‚ª•ª‚©‚èŸ‘æCC³‚µ‚Ü‚·
-                // pattern = Pattern.compile("^y");
+                // ãƒ¡ãƒ¢
+                // ãªãœã‹æ¬¡ã®æ­£è¦è¡¨ç¾ã§ã¯å¼•ã£ã‹ã‹ã‚‰ãªã‹ã£ãŸ
+                //ã€€â†’ã€€åŸå› ãŒåˆ†ã‹ã‚Šæ¬¡ç¬¬ï¼Œä¿®æ­£ã—ã¾ã™
+                // pattern = Pattern.compile("^ã€");
 
-                // •s–{ˆÓ‚È‚ª‚çŸ‚Ì³‹K•\Œ»‚Å
-                pattern = Pattern.compile("y(.+)");
+                // ä¸æœ¬æ„ãªãŒã‚‰æ¬¡ã®æ­£è¦è¡¨ç¾ã§
+                pattern = Pattern.compile("ã€(.+)");
                 matcher = pattern.matcher(line);
                 if (i >= memoRow && matcher.matches() == true
                         && gotJigyo == true && gotMemo == false) {
@@ -191,8 +192,8 @@ public class ParseCampanyContentsSample {
                     continue;
                 }
 
-                // ƒƒ‚2
-                pattern = Pattern.compile("y(.+)");
+                // ãƒ¡ãƒ¢2
+                pattern = Pattern.compile("ã€(.+)");
                 matcher = pattern.matcher(line);
                 if (i >= memoRow && matcher.matches() == true
                         && gotMemo == true && gotMemo2 == false) {
@@ -201,33 +202,33 @@ public class ParseCampanyContentsSample {
                     break;
                 }
 
-                // ˆÈ‰ºC—áŠO
-                // •Êƒƒ\ƒbƒh‚É‚µ‚æ‚¤‚Æl‚¦‚Ä‚¢‚½‚ªC
-                // campanyContents ‚ğ readline ‚Å“Ç‚İæ‚é‚½‚ßC
-                // ‘±‚¯‚Ä‹Lq‚·‚é
+                // ä»¥ä¸‹ï¼Œä¾‹å¤–
+                // åˆ¥ãƒ¡ã‚½ãƒƒãƒ‰ã«ã—ã‚ˆã†ã¨è€ƒãˆã¦ã„ãŸãŒï¼Œ
+                // campanyContents ã‚’ readline ã§èª­ã¿å–ã‚‹ãŸã‚ï¼Œ
+                // ç¶šã‘ã¦è¨˜è¿°ã™ã‚‹
 
                 String errorMessage;
-                errorMessage = ".*‚¨‹q—l‚Ì‚²‘I‘ğ‚³‚ê‚½ƒT[ƒrƒX‚Íó•to—ˆ‚Ü‚¹‚ñ‚Å‚µ‚½B.*";
+                errorMessage = ".*ãŠå®¢æ§˜ã®ã”é¸æŠã•ã‚ŒãŸã‚µãƒ¼ãƒ“ã‚¹ã¯å—ä»˜å‡ºæ¥ã¾ã›ã‚“ã§ã—ãŸã€‚.*";
                 if (Pattern.matches(errorMessage, line) == true) {
                     throw new SBI_Exception(errorMessage);
                 }
 
-                // ƒƒOƒCƒ“‚³‚ê‚Ä‚¢‚È‚¢‚Æ‚«
-                errorMessage = ".*‚±‚¿‚ç‚Ìî•ñ‚¨‚æ‚ÑƒT[ƒrƒX‚ğ‚²—˜—p‚¢‚½‚¾‚­‚½‚ß‚É‚ÍAŒÚ‹qƒTƒCƒg‚Ö‚ÌƒƒOƒCƒ“‚ª•K—v‚Å‚·B.*";
+                // ãƒ­ã‚°ã‚¤ãƒ³ã•ã‚Œã¦ã„ãªã„ã¨ã
+                errorMessage = ".*ã“ã¡ã‚‰ã®æƒ…å ±ãŠã‚ˆã³ã‚µãƒ¼ãƒ“ã‚¹ã‚’ã”åˆ©ç”¨ã„ãŸã ããŸã‚ã«ã¯ã€é¡§å®¢ã‚µã‚¤ãƒˆã¸ã®ãƒ­ã‚°ã‚¤ãƒ³ãŒå¿…è¦ã§ã™ã€‚.*";
                 if (Pattern.matches(errorMessage, line) == true) {
                     throw new SBI_Exception(errorMessage);
                 }
 
-                // ‘ÎÛ–Á•¿‚ª‚È‚¢‚Æ‚«‚Æ‚¢‚¤‚Ì‚Í’Êí‹N‚±‚è“¾‚éƒP[ƒX‚È‚Ì‚ÅCƒXƒLƒbƒv‚·‚é‚¾‚¯
-                errorMessage = ".*‘ÎÛ–Á•¿‚Í‚ ‚è‚Ü‚¹‚ñB.*";
+                // å¯¾è±¡éŠ˜æŸ„ãŒãªã„ã¨ãã¨ã„ã†ã®ã¯é€šå¸¸èµ·ã“ã‚Šå¾—ã‚‹ã‚±ãƒ¼ã‚¹ãªã®ã§ï¼Œã‚¹ã‚­ãƒƒãƒ—ã™ã‚‹ã ã‘
+                errorMessage = ".*å¯¾è±¡éŠ˜æŸ„ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚.*";
                 // errorMessage = ".*";
                 if (Pattern.matches(errorMessage, line) == true) {
                     throw new NoCampanyException(errorMessage);
                 }
 
-                // “Š‘M‘õ‚È‚Ç‚Ì‚Æ‚«‚ÍC‰ïĞl‹G•ñ‚Ìî•ñ‚ª’ñ‹Ÿ‚³‚ê‚Ä‚¢‚È‚¢
-                // ‚±‚ê‚à’Êí‹N‚±‚è“¾‚éƒP[ƒX‚È‚Ì‚ÅCƒXƒLƒbƒv‚·‚é‚¾‚¯
-                errorMessage = ".*‚¨‹q—l‚ª‘I‘ğ‚³‚ê‚½–Á•¿‚Ì“Š‘î•ñ‚ÍAŒ»İ’ñ‹Ÿ‚µ‚Ä‚¨‚è‚Ü‚¹‚ñB.*";
+                // æŠ•è³‡ä¿¡è¨—ãªã©ã®ã¨ãã¯ï¼Œä¼šç¤¾å››å­£å ±ã®æƒ…å ±ãŒæä¾›ã•ã‚Œã¦ã„ãªã„
+                // ã“ã‚Œã‚‚é€šå¸¸èµ·ã“ã‚Šå¾—ã‚‹ã‚±ãƒ¼ã‚¹ãªã®ã§ï¼Œã‚¹ã‚­ãƒƒãƒ—ã™ã‚‹ã ã‘
+                errorMessage = ".*ãŠå®¢æ§˜ãŒé¸æŠã•ã‚ŒãŸéŠ˜æŸ„ã®æŠ•è³‡æƒ…å ±ã¯ã€ç¾åœ¨æä¾›ã—ã¦ãŠã‚Šã¾ã›ã‚“ã€‚.*";
                 if (Pattern.matches(errorMessage, line) == true) {
                     throw new NoCampanyException(errorMessage);
                 }
@@ -240,16 +241,16 @@ public class ParseCampanyContentsSample {
     }
 }
 
-‚È‚¨C“Æ©‚Ì—áŠOƒNƒ‰ƒX‚ğ‚Â‚­‚éÛ‚É‚ÍCException ƒNƒ‰ƒX‚ğŒp³‚µ‚Ä‚ ‚°‚È‚¯‚ê‚Î‚¢‚¯‚Ü‚¹‚ñ‚ªC‚»‚ê‚Í•Ê‚Ì‚Æ‚±‚ë‚É‘‚«‚Ü‚µ‚½i‰º‹LjB
+ãªãŠï¼Œç‹¬è‡ªã®ä¾‹å¤–ã‚¯ãƒ©ã‚¹ã‚’ã¤ãã‚‹éš›ã«ã¯ï¼ŒException ã‚¯ãƒ©ã‚¹ã‚’ç¶™æ‰¿ã—ã¦ã‚ã’ãªã‘ã‚Œã°ã„ã‘ã¾ã›ã‚“ãŒï¼Œãã‚Œã¯åˆ¥ã®ã¨ã“ã‚ã«æ›¸ãã¾ã—ãŸï¼ˆä¸‹è¨˜ï¼‰ã€‚
 
 /**
- * SBIØŒ”‚ÌƒTƒCƒg‚Ì‘€ì‚É”­¶‚·‚é—áŠO
- * —á‚¦‚ÎCƒTƒCƒg“à—e‚ğ‚¤‚Ü‚­æ“¾‚Å‚«‚È‚©‚Á‚½ê‡‚È‚Ç
+ * SBIè¨¼åˆ¸ã®ã‚µã‚¤ãƒˆã®æ“ä½œæ™‚ã«ç™ºç”Ÿã™ã‚‹ä¾‹å¤–
+ * ä¾‹ãˆã°ï¼Œã‚µã‚¤ãƒˆå†…å®¹ã‚’ã†ã¾ãå–å¾—ã§ããªã‹ã£ãŸå ´åˆãªã©
  */
 public class SBI_Exception extends Exception {
 
     /**
-     * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+     * ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
      * 
      * @param message
      */
@@ -259,12 +260,12 @@ public class SBI_Exception extends Exception {
 }
 
 /**
- * SBIØŒ”‚ÌƒTƒCƒg‚Ì‘€ìC‘ÎÛ–Á•¿‚ª‚È‚©‚Á‚½‚Æ‚«‚É”­¶‚·‚é—áŠO
+ * SBIè¨¼åˆ¸ã®ã‚µã‚¤ãƒˆã®æ“ä½œæ™‚ï¼Œå¯¾è±¡éŠ˜æŸ„ãŒãªã‹ã£ãŸã¨ãã«ç™ºç”Ÿã™ã‚‹ä¾‹å¤–
  */
 public class NoCampanyException extends Exception {
 
     /**
-     * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+     * ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
      * 
      * @param message
      */
